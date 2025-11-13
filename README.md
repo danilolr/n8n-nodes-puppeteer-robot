@@ -22,7 +22,19 @@ Npm package name is : @puppeteer-robot/n8n-nodes-puppeteer-robot
 
 ## Operations
 
-_List the operations supported by your node._
+This node supports the following resources and operations:
+
+### Robot Lifecycle
+- **Start Robot** - Initialize and start a Puppeteer Robot instance
+- **End Robot** - Terminate and clean up a Puppeteer Robot instance
+
+### Context
+- **Get Context** - Retrieve values from the Puppeteer Robot context
+- **Set Context** - Store values in the Puppeteer Robot context
+
+### Tools
+- **Execute** - Execute custom Puppeteer code
+- **Get Screenshot** - Capture a screenshot from the current page
 
 ## Credentials
 
