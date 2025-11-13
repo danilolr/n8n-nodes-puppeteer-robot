@@ -1,6 +1,6 @@
 {
     "name": "@puppeteer-robot/n8n-nodes-puppeteer-robot",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "Node package for n8n to automate web interactions using Puppeteer.",
     "license": "MIT",
     "homepage": "",
