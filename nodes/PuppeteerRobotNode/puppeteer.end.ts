@@ -6,7 +6,7 @@ export async function executePuppeteerEnd(self: IExecuteFunctions): Promise<INod
     const executionMemory = PuppeteerMemoryService.getExecutionMemory(self)
     const puppeteerServer = executionMemory.read("puppeteerServer");
     const robotId = executionMemory.read("robotId");
-    const resp = await safeHttpCall(self, `${puppeteerServer}/puppeter-robot/delete/${robotId}`, "DELETE", null)
+    const resp = await safeHttpCall(self, `${puppeteerServer}/puppeteer-robot/delete/${robotId}`, "DELETE", null)
     return [[{
         json: resp,
     }]]

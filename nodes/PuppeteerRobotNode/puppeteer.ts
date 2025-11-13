@@ -19,7 +19,7 @@ export async function executePuppeteerExecute(self: IExecuteFunctions): Promise<
     self.logger.info("Code: " + code + " runOnPageContext: " + runOnPageContext)
     const options: IHttpRequestOptions = {
         method: 'PUT',
-        url: `${puppeteerServer}/puppeter-robot/run`,
+        url: `${puppeteerServer}/puppeteer-robot/run`,
         body: {
             "robotId": robotId,
             "command": code

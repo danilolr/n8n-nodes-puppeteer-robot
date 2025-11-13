@@ -18,13 +18,15 @@ _App/service name_ is _one or two sentences describing the service this node int
 
 Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation.
 
+Npm package name is : @puppeteer-robot/n8n-nodes-puppeteer-robot
+
 ## Operations
 
 _List the operations supported by your node._
 
 ## Credentials
 
-_If users need to authenticate with the app/service, provide details here. You should include prerequisites (such as signing up with the service), available authentication methods, and how to set them up._
+No credentials needed (for now)
 
 ## Compatibility
 

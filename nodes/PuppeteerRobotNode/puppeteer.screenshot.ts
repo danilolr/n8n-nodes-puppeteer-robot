@@ -7,7 +7,7 @@ export async function executePuppeteerScreenshot(self: IExecuteFunctions): Promi
     const puppeteerServer = executionMemory.read("puppeteerServer")
     const robotId = executionMemory.read("robotId")
     
-    const resp = await safeHttpCall(self, `${puppeteerServer}/puppeter-robot/screenshot/${robotId}`, "GET", null)
+    const resp = await safeHttpCall(self, `${puppeteerServer}/puppeteer-robot/screenshot/${robotId}`, "GET", null)
     self.logger.info("Puppeteer response: " + JSON.stringify(resp))
 
     return [[{
