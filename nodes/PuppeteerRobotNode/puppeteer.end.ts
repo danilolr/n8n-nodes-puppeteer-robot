@@ -1,6 +1,6 @@
 import { IExecuteFunctions, INodeExecutionData } from "n8n-workflow"
-import { safeHttpCall } from "./util";
-import { PuppeteerMemoryService } from "./memory";
+import { safeHttpCall } from "./util"
+import { PuppeteerMemoryService } from "./memory"
 
 export async function executePuppeteerEnd(self: IExecuteFunctions): Promise<INodeExecutionData[][]> {
     const executionMemory = PuppeteerMemoryService.getExecutionMemory(self)
