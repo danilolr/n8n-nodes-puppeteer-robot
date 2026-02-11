@@ -7,6 +7,11 @@ export async function executePuppeteerStart(self: IExecuteFunctions): Promise<IN
     self.logger.error("Input Data: " + JSON.stringify(input))
     const resumeUrl = self.evaluateExpression('{{ $execution?.resumeUrl }}', 0) as string
     const puppeteerServer = self.getNodeParameter('puppeteerServer', 0, '') as string
+    let puppeteerServerApiKey : string | null = self.getNodeParameter('puppeteerServerApiKey', 0, '') as string
+    if (puppeteerServerApiKey === '') {
+        puppeteerServerApiKey = null
+    }
+
     let puppeteerPool = self.getNodeParameter('puppeteerPoolStart', 0, '') as string
     if (puppeteerPool === '') {
         puppeteerPool = "none"
@@ -14,6 +19,7 @@ export async function executePuppeteerStart(self: IExecuteFunctions): Promise<IN
 
     const executionMemory = PuppeteerMemoryService.getExecutionMemory(self)
     executionMemory.write("puppeteerServer", puppeteerServer)
+    executionMemory.write("puppeteerServerApiKey", puppeteerServerApiKey)    
     executionMemory.write("resumeUrl", resumeUrl)
     executionMemory.write("params", input.params)
     executionMemory.write("puppeteerPool", puppeteerPool)
@@ -24,7 +30,7 @@ export async function executePuppeteerStart(self: IExecuteFunctions): Promise<IN
     self.logger.info("Resume puppeteerServer: " + puppeteerServer)
     const url = `${puppeteerServer}/puppeteer-robot/create/${puppeteerPool}`
     self.logger.info("Vai chamar o puppeteer server: " + url)
-    const resp = await safeHttpCall(self, url, 'POST', null)
+    const resp = await safeHttpCall(self, url, 'POST', null, puppeteerServerApiKey)
     self.logger.info("Puppeteer response: " + JSON.stringify(resp))
     executionMemory.write("robotId", resp.robotId)
 
@@ -45,6 +51,25 @@ export async function executePuppeteerStart(self: IExecuteFunctions): Promise<IN
             await self.putExecutionToWait(waitTill)
         }
     }
+
+    // const responseBody = {
+    //     status: 'completado',
+    //     mensagem: 'Resposta enviada programaticamente pelo nó customizado',
+    //     data: jsonResp,
+    // };
+
+    // const response: IExecuteResponsePromiseData = {
+    //     body: responseBody,
+    //     responseCode: 200,
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //         'X-Custom-Header': 'n8n-custom-node',
+    //     },
+    //     noWebhookResponse: false,
+    //     statusCode: 200,
+    // };
+
+    // await self.sendResponse(response);
 
     const onResponse: INodeExecutionData[] = [
         {

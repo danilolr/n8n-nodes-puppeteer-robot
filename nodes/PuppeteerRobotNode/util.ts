@@ -1,6 +1,6 @@
-import { GenericValue, IExecuteFunctions, IHttpRequestMethods, IHttpRequestOptions } from "n8n-workflow"
+import { GenericValue, IDataObject, IExecuteFunctions, IHttpRequestMethods, IHttpRequestOptions } from "n8n-workflow"
 
-export async function safeHttpCall(self: IExecuteFunctions, url: string, method: IHttpRequestMethods, body: GenericValue | GenericValue[] ) {
+export async function safeHttpCall(self: IExecuteFunctions, url: string, method: IHttpRequestMethods, body: GenericValue | GenericValue[], apiKey: string | null = null): Promise<IDataObject> {
     self.logger.info(`Making SAFE HTTP call to ${url} with method ${method}`)
     self.logger.debug(`Request body: ${JSON.stringify(body)}`)
     const options: IHttpRequestOptions = {
@@ -9,7 +9,8 @@ export async function safeHttpCall(self: IExecuteFunctions, url: string, method:
         body: body,
         json: true,
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}`
         },
     }
     const resp = await self.helpers.httpRequest(options)

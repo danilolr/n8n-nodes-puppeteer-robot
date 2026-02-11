@@ -36,7 +36,8 @@
         "strict": true,
         "credentials": [],
         "nodes": [
-            "dist/nodes/PuppeteerRobotNode/PuppeteerRobotNode.node.js"
+            "dist/nodes/PuppeteerRobotNode/PuppeteerRobotNode.node.js",
+            "dist/nodes/PuppeteerRobotWebhook/PuppeteerRobotWebhook.node.js"            
         ]
     },
     "devDependencies": {

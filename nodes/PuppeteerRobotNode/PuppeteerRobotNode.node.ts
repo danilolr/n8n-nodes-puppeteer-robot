@@ -145,6 +145,23 @@ export class PuppeteerRobotNode implements INodeType {
 				},
 			},
 			{
+				displayName: 'Puppeteer Server API Key',
+				name: 'puppeteerServerApiKey',
+				type: 'string',
+				default: '',
+				placeholder: '',
+				typeOptions: {
+					password: true,
+				},
+				displayOptions: {
+					show: {
+						operation: [
+							'puppeteerStart',
+						],
+					},
+				},
+			},
+			{
 				displayName: 'Puppeteer Pool',
 				name: 'puppeteerPoolStart',
 				type: 'string',
@@ -206,6 +223,27 @@ export class PuppeteerRobotNode implements INodeType {
 					},
 				},
 			},
+			{
+                displayName: 'On Error',
+                name: 'onErrorType',
+                type: 'options',
+                noDataExpression: true,
+                options: [
+                    {
+                        name: 'Continue',
+                        value: 'continue',
+                    },
+                    {
+                        name: 'Exception on All Errors',
+                        value: 'exceptionOnAllErrors',
+                    },
+                    {
+                        name: 'Exception on no user error',
+                        value: 'exceptionOnNoUserError',
+                    },
+                ],
+                default: 'exceptionOnAllErrors',
+            },
 			{
 				displayName: 'Sleep (Seconds)',
 				name: 'sleepOnStart',
