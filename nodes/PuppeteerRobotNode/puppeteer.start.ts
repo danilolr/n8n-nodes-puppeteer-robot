@@ -29,9 +29,9 @@ export async function executePuppeteerStart(self: IExecuteFunctions): Promise<IN
     self.logger.info("Puppeteer: execute Puppeteer Start operation")
     self.logger.info("Resume URL: " + resumeUrl)
     self.logger.info("Resume puppeteerServer: " + puppeteerServer)
-    const url = `${puppeteerServer}/puppeteer-robot/create/${puppeteerPool}`
+    const url = `puppeteer-robot/create/${puppeteerPool}`
     self.logger.info("Vai chamar o puppeteer server: " + url)
-    const resp = await safeHttpCall(self, url, 'POST', null, puppeteerServerApiKey)
+    const resp = await safeHttpCall(self, url, 'POST', null)
     self.logger.info("Puppeteer response: " + JSON.stringify(resp))
     executionMemory.write("robotId", resp.robotId)
 

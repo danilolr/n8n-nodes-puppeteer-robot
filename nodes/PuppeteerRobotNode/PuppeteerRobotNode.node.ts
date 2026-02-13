@@ -162,38 +162,6 @@ export class PuppeteerRobotNode implements INodeType {
 				noDataExpression: true,
 			},
 			{
-				displayName: 'Puppeteer Server',
-				name: 'puppeteerServer',
-				type: 'string',
-				default: '',
-				placeholder: '',
-				description: 'Puppeteer Server URL',
-				displayOptions: {
-					show: {
-						operation: [
-							'puppeteerStart',
-						],
-					},
-				},
-			},
-			{
-				displayName: 'Puppeteer Server API Key',
-				name: 'puppeteerServerApiKey',
-				type: 'string',
-				default: '',
-				placeholder: '',
-				typeOptions: {
-					password: true,
-				},
-				displayOptions: {
-					show: {
-						operation: [
-							'puppeteerStart',
-						],
-					},
-				},
-			},
-			{
 				displayName: 'Puppeteer Pool',
 				name: 'puppeteerPoolStart',
 				type: 'string',

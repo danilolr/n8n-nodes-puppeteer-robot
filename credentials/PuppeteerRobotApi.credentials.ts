@@ -48,7 +48,7 @@ export class PuppeteerRobotApi implements ICredentialType {
 
 	test: ICredentialTestRequest = {
 		request: {
-			baseURL: '{{$credentials?.puppeteerServer}}/puppeteer-robot',
+			baseURL: '= {{$credentials?.puppeteerServer}}/puppeteer-robot',
 			url: '/version',
 			method: 'GET',
 		},
