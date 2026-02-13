@@ -1,4 +1,5 @@
-import { GenericValue, IDataObject, IExecuteFunctions, IHttpRequestMethods, IHttpRequestOptions } from "n8n-workflow"
+import { GenericValue, IDataObject, IExecuteFunctions, IHttpRequestMethods, IHttpRequestOptions, NodeOperationError } from "n8n-workflow"
+import { PuppeteerMemoryService } from "./memory"
 
 export async function safeHttpCall(self: IExecuteFunctions, url: string, method: IHttpRequestMethods, body: GenericValue | GenericValue[], apiKey: string | null = null): Promise<IDataObject> {
     self.logger.info(`Making SAFE HTTP call to ${url} with method ${method}`)
@@ -20,4 +21,15 @@ export async function safeHttpCall(self: IExecuteFunctions, url: string, method:
 export function getPrevInput(self: IExecuteFunctions) {
     const input = self.getInputData(0)[0].json
     return input
+}
+
+export function throwException(self: IExecuteFunctions, label: string, description: string) {
+    const executionMemory = PuppeteerMemoryService.getExecutionMemory(self)
+
+    const robotId = executionMemory.read("robotId")
+    throw new NodeOperationError(self.getNode(), label, {
+        description: JSON.stringify({
+            description, "robotId": robotId
+        }),
+    })
 }

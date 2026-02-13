@@ -1,6 +1,7 @@
 import { IExecuteFunctions, INodeExecutionData, sleep } from "n8n-workflow"
 import { safeHttpCall } from "./util"
 import { PuppeteerMemoryService } from "./memory"
+import { ExecutionMemoryData } from "./model"
 
 export async function executePuppeteerStart(self: IExecuteFunctions): Promise<INodeExecutionData[][]> {
     const input = self.getInputData()[0].json
@@ -35,6 +36,13 @@ export async function executePuppeteerStart(self: IExecuteFunctions): Promise<IN
     executionMemory.write("robotId", resp.robotId)
 
     self.logger.info("Instance Data: " + JSON.stringify(executionMemory.getAll()))
+
+    let executionMemoryData = executionMemory.read("ExecutionMemoryData") as ExecutionMemoryData
+    if (!executionMemoryData) {
+        executionMemoryData = new ExecutionMemoryData()
+        executionMemory.write("ExecutionMemoryData", executionMemoryData)
+    }
+    executionMemoryData.addExecutionData(self, {body: input.body})
 
     const jsonResp = {
         context: executionMemory.getAll(),

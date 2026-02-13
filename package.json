@@ -34,7 +34,9 @@
     "n8n": {
         "n8nNodesApiVersion": 1,
         "strict": true,
-        "credentials": [],
+        "credentials": [
+            "dist/credentials/PuppeterRobotCredentials.node.js"
+        ],
         "nodes": [
             "dist/nodes/PuppeteerRobotNode/PuppeteerRobotNode.node.js",
             "dist/nodes/PuppeteerRobotWebhook/PuppeteerRobotWebhook.node.js"            

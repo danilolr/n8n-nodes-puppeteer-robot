@@ -16,12 +16,12 @@ export class ExecutionMemoryData {
         self.logger.info("Current list for node " + nodeName + ": " + JSON.stringify(list))
         list?.push(value)
         self.logger.info("Updated list for node " + nodeName + ": " + JSON.stringify(list))
-        self.logger.info("Updated data " + JSON.stringify(this.data))
+        self.logger.info("Updated data " + JSON.stringify(Object.fromEntries(this.data)))
         this.lastValue = value
     }
 
     getData():Map<string, unknown[]> {
-        return this.data
+        return Object.fromEntries(this.data) as unknown as Map<string, unknown[]>
     }
 
     getLastValue(): unknown {
