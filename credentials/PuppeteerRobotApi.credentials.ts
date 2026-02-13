@@ -6,10 +6,10 @@ import type {
 	INodeProperties,
 } from 'n8n-workflow'
 
-export class PuppeterRobotApi implements ICredentialType {
-	name = 'puppeterRobotApi';
+export class PuppeteerRobotApi implements ICredentialType {
+	name = 'puppeteerRobotApi';
 
-	displayName = 'Puppeter Robot API';
+	displayName = 'Puppeteer Robot API';
 
 	icon: Icon = 'file:puppeteerRobot.svg'
 
@@ -48,7 +48,7 @@ export class PuppeterRobotApi implements ICredentialType {
 
 	test: ICredentialTestRequest = {
 		request: {
-			baseURL: 'http://192.168.0.10:3000/puppeteer-robot',
+			baseURL: '{{$credentials?.puppeteerServer}}/puppeteer-robot',
 			url: '/version',
 			method: 'GET',
 		},

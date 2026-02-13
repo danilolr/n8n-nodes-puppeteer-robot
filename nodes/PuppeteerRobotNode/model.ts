@@ -29,3 +29,8 @@ export class ExecutionMemoryData {
     }
 
 }
+
+export interface PuppeteerCredentialsData {
+    puppeteerServer: string
+    puppeteerServerApiKey: string
+}

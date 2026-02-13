@@ -35,7 +35,7 @@
         "n8nNodesApiVersion": 1,
         "strict": true,
         "credentials": [
-            "dist/credentials/PuppeterRobotCredentials.node.js"
+            "dist/credentials/PuppeteerRobotApi.credentials.js"
         ],
         "nodes": [
             "dist/nodes/PuppeteerRobotNode/PuppeteerRobotNode.node.js",

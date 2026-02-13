@@ -11,6 +11,7 @@ import { executePuppeteerEnd } from './puppeteer.end'
 import { executePuppeteerContextGet } from './puppeteer.context.get'
 import { executePuppeteerScreenshot } from './puppeteer.screenshot'
 import { executePuppeteerContextSet } from './puppeteer.context.set'
+import { executePuppeteerErrorHandling } from './puppeteer.error'
 
 export class PuppeteerRobotNode implements INodeType {
 	description: INodeTypeDescription = {
@@ -27,6 +28,12 @@ export class PuppeteerRobotNode implements INodeType {
 		inputs: [NodeConnectionTypes.Main],
 		outputs: [NodeConnectionTypes.Main],
 		usableAsTool: true,
+		credentials: [
+			{
+				name: 'puppeteerRobotApi',
+				required: false,
+			},
+		],
 		properties: [
 			{
                 displayName: 'Resource',
@@ -45,6 +52,10 @@ export class PuppeteerRobotNode implements INodeType {
                     {
                         name: 'Tool',
                         value: 'tools',
+                    },
+                    {
+                        name: 'Error',
+                        value: 'error',
                     },
                 ],
                 default: 'robot',
@@ -101,6 +112,27 @@ export class PuppeteerRobotNode implements INodeType {
 					},
 				],
 				default: 'puppeteerContextGet',
+				noDataExpression: true,
+			},
+			{
+				displayName: 'Operation',
+				name: 'operation',
+				type: 'options',
+				displayOptions: {
+                    show: {
+                        resource: [
+                            'error',
+                        ],
+                    },	
+                },
+				options: [
+					{
+						name: "Error Handling",
+						value: "errorHandling",
+						action: 'Error handling',
+					},
+				],
+				default: 'errorHandling',
 				noDataExpression: true,
 			},
 			{
@@ -304,9 +336,11 @@ export class PuppeteerRobotNode implements INodeType {
 				],
 			}
 		],
-	};
+	}
 
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
+		const credentials = await this.getCredentials('puppeteerRobotApi')
+		this.logger.info('Credentials: ' + JSON.stringify(credentials))
 		const operation = this.getNodeParameter('operation', 0, '') as string
 		if (operation === 'puppeteerStart') {
 			return await executePuppeteerStart(this)
@@ -320,7 +354,10 @@ export class PuppeteerRobotNode implements INodeType {
 			return await executePuppeteerContextSet(this)
 		} else if (operation === 'puppeteerScreenshot') {
 			return await executePuppeteerScreenshot(this)
+		} else if (operation === 'errorHandling') {
+			return await executePuppeteerErrorHandling(this)
 		}
+			
 		return [this.getInputData()]
 	}
 
