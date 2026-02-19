@@ -18,7 +18,7 @@ export class PuppeteerRobotNode implements INodeType {
 		displayName: 'Puppeteer Robot',
 		name: 'puppeteerRobotNode',
 		group: ['transform'],
-		version: 1,
+		version: [1, 2],
 		subtitle: '={{$parameter["operation"]}}',
 		description: 'Interact with Puppeteer Robot',
 		icon: 'file:puppeteerRobot.svg',
